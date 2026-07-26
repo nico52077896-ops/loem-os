@@ -49,42 +49,68 @@ export default async function ProductDetailPage({
   // 数据库字段 -> 前端 Product 类型转换
   const product = {
 
-    ...rawProduct,
+  ...rawProduct,
 
 
-    // snake_case 转 camelCase
-    productCode:
-      rawProduct.product_code,
+  // 字段转换
+  productCode:
+    rawProduct.product_code ?? "",
 
 
-    launchSeason:
-      rawProduct.launch_season,
+  launchSeason:
+    rawProduct.launch_season ?? "",
 
 
-    retailPrice:
-      rawProduct.retail_price,
+  retailPrice:
+    rawProduct.retail_price ?? 0,
 
 
-    targetCost:
-      rawProduct.target_cost,
+  targetCost:
+    rawProduct.target_cost ?? 0,
 
 
-    currentCost:
-      rawProduct.current_cost,
+  currentCost:
+    rawProduct.current_cost ?? 0,
 
 
-    coverImage:
-      rawProduct.cover_image,
+  coverImage:
+    rawProduct.cover_image ?? "",
 
 
-    aiInsights:
-      rawProduct.ai_insights,
+  aiInsights:
+    rawProduct.ai_insights ?? "",
 
 
-    // 如果数据库没有，补默认值
-    
 
-  };
+  // Product 类型需要，但数据库暂无
+  designer:
+    "",
+
+
+  factory:
+    "",
+
+
+  costs:
+    [],
+
+
+  materials:
+    [],
+
+
+  samples:
+    [],
+
+
+  documents:
+    [],
+
+
+  timeline:
+    [],
+
+};
 
 
 
