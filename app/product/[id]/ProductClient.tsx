@@ -17,236 +17,231 @@ import ProductHeader from "@/components/product/ProductHeader";
 import ProductWorkspace from "@/components/product/ProductWorkspace";
 
 
-import type {Product} from "@/lib/products";
+import type { Product } from "@/lib/products";
 
 
 
 export default function ProductClient({
 
- product
+  product
 
-}:{
- product:Product
+}: {
+
+  product: Product
 
 }){
 
 
-const [currentStage,setCurrentStage] = useState(
-  "企划"
-);
+  const [currentStage,setCurrentStage] = useState(
+    "企划"
+  );
 
 
 
-useEffect(()=>{
+  useEffect(()=>{
 
 
-let active = true;
+    let active = true;
 
 
 
-async function loadCurrentStage(){
+    async function loadCurrentStage(){
 
 
-const {
+      const {
 
-data,
+        data,
 
-error
+        error
 
-}=await supabase
+      } = await supabase
 
-.from("timeline")
+        .from("timeline")
 
-.select("*")
+        .select("*")
 
-.eq(
-"product_id",
-product.id
-);
+        .eq(
+          "product_id",
+          product.id
+        );
 
 
 
 
-if(error || !data || !active){
+      if(error || !data || !active){
 
-return;
+        return;
 
-}
+      }
 
 
 
 
-const stages = [
+      const stages = [
 
-"企划",
+        "企划",
 
-"设计",
+        "设计",
 
-"面料",
+        "面料",
 
-"打版",
+        "打版",
 
-"样衣",
+        "样衣",
 
-"成本",
+        "成本",
 
-"生产",
+        "生产",
 
-"上市"
+        "上市"
 
-];
+      ];
 
 
 
 
-// 1. 优先找进行中
 
-const running = data.find(
+      // 找进行中的阶段
 
-item =>
-item.status === "进行中"
+      const running = data.find(
 
-);
+        item => item.status === "进行中"
 
+      );
 
 
-if(running){
 
+      if(running){
 
-setCurrentStage(
-running.stage
-);
 
+        setCurrentStage(
+          running.stage
+        );
 
-return;
 
-}
+        return;
 
+      }
 
 
 
-// 2. 找最后一个完成阶段
 
-const completedIndexes = data
 
-.filter(
-item=>item.status==="已完成"
-)
+      // 找最后完成阶段
 
-.map(item=>{
+      const completedIndexes = data
 
-return stages.indexOf(
-item.stage
-);
+        .filter(
 
-})
+          item => item.status === "已完成"
 
-.filter(
-i=>i>=0
-);
+        )
 
+        .map(
 
+          item => stages.indexOf(item.stage)
 
+        )
 
+        .filter(
 
-if(completedIndexes.length){
+          i => i >= 0
 
+        );
 
-const lastIndex =
-Math.max(
-...completedIndexes
-);
 
 
 
-setCurrentStage(
+      if(completedIndexes.length){
 
-stages[
-Math.min(
-lastIndex+1,
-stages.length-1
-)
-]
 
-);
+        const lastIndex = Math.max(
+          ...completedIndexes
+        );
 
 
-return;
 
+        setCurrentStage(
 
-}
+          stages[
+            Math.min(
+              lastIndex + 1,
+              stages.length - 1
+            )
+          ]
 
+        );
 
 
+        return;
 
-// 3. 都没有 默认企划
+      }
 
-setCurrentStage(
-"企划"
-);
 
 
 
-}
+      setCurrentStage(
+        "企划"
+      );
 
 
 
-loadCurrentStage();
+    }
 
 
 
-return ()=>{
+    loadCurrentStage();
 
-active=false;
 
-};
 
+    return ()=>{
 
-},[product.id]);
+      active = false;
 
+    };
 
 
+  },[product.id]);
 
 
-return (
 
-<>
 
 
-<ProductHeader
+  return (
 
-id={product.id}
+    <>
 
-name={product.name}
+      <ProductHeader
 
-productCode={product.product_code}
+        id={product.id}
 
-launchSeason={product.launch_season}
+        name={product.name}
 
-owner={product.owner}
+        productCode={product.product_code}
 
-category={product.category}
+        launchSeason={product.launch_season}
 
-retailPrice={product.retailPrice}
+        owner={product.owner}
 
-targetCost={product.targetCost}
+        category={product.category}
 
-/>
+        retailPrice={product.retail_price}
 
+        targetCost={product.target_cost}
 
+      />
 
 
 
-<ProductWorkspace
+      <ProductWorkspace
 
-product={product}
+        product={product}
 
-/>
+      />
 
 
+    </>
 
-</>
-
-)
+  )
 
 }

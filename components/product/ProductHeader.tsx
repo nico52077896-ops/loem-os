@@ -11,6 +11,14 @@ export default function ProductHeader({
 
   launchSeason,
 
+  owner,
+
+  category,
+
+  retailPrice,
+
+  targetCost,
+
 }:{
 
   id:string;
@@ -20,6 +28,14 @@ export default function ProductHeader({
   productCode?:string;
 
   launchSeason?:string;
+
+  owner?:string;
+
+  category?:string;
+
+  retailPrice?:number;
+
+  targetCost?:number;
 
 }){
 
@@ -71,11 +87,11 @@ tracking-tight
 mt-6
 flex
 gap-12
+flex-wrap
 ">
 
 
 <div>
-
 
 <p className="
 text-xs
@@ -106,7 +122,6 @@ text-white/80
 
 <div>
 
-
 <p className="
 text-xs
 text-white/30
@@ -124,6 +139,138 @@ text-white/80
 ">
 
 {launchSeason || "-"}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+<p className="
+text-xs
+text-white/30
+">
+
+负责人
+
+</p>
+
+
+<p className="
+mt-2
+text-sm
+text-white/80
+">
+
+{owner || "-"}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+<p className="
+text-xs
+text-white/30
+">
+
+品类
+
+</p>
+
+
+<p className="
+mt-2
+text-sm
+text-white/80
+">
+
+{category || "-"}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+<p className="
+text-xs
+text-white/30
+">
+
+目标零售价
+
+</p>
+
+
+<p className="
+mt-2
+text-sm
+text-white/80
+">
+
+{
+retailPrice
+?
+`¥${retailPrice}`
+:
+"-"
+}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+<p className="
+text-xs
+text-white/30
+">
+
+目标成本
+
+</p>
+
+
+<p className="
+mt-2
+text-sm
+text-white/80
+">
+
+{
+targetCost
+?
+`¥${targetCost}`
+:
+"-"
+}
 
 </p>
 
