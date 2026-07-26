@@ -18,11 +18,12 @@ export default async function ProductDetailPage({
 
 
   // 从数据库读取
-  const products = await getProducts();
+  const products: any[] = await getProducts();
 
 
-  const rawProduct = products.find(
-    p => p.id === id
+  // 临时放宽类型，兼容数据库字段
+  const rawProduct: any = products.find(
+    (p: any) => p.id === id
   );
 
 
@@ -46,14 +47,15 @@ export default async function ProductDetailPage({
 
 
 
-  // 数据库字段转换为 Product 类型
+  // 数据库字段转换为前端 Product 类型
   const product = {
 
 
     id: rawProduct.id,
 
 
-    name: rawProduct.name ?? "",
+    name:
+      rawProduct.name ?? "",
 
 
     product_code:
