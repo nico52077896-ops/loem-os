@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+
+
 import ProductClient from "./ProductClient";
 import { getProducts } from "@/lib/productStore";
 
@@ -21,11 +24,9 @@ export default async function ProductDetailPage({
   const products: any[] = await getProducts();
 
 
-  // 临时放宽类型，兼容数据库字段
   const rawProduct: any = products.find(
     (p: any) => p.id === id
   );
-
 
 
   if (!rawProduct) {
@@ -47,7 +48,7 @@ export default async function ProductDetailPage({
 
 
 
-  // 数据库字段转换为前端 Product 类型
+  // 数据库字段转换
   const product = {
 
 
@@ -72,6 +73,12 @@ export default async function ProductDetailPage({
 
     category:
       rawProduct.category ?? "",
+
+
+
+    // ✅ 加这个
+    cover_image:
+      rawProduct.cover_image ?? "",
 
 
 
@@ -164,7 +171,6 @@ export default async function ProductDetailPage({
 
 
   };
-
 
 
 
