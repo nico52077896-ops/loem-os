@@ -58,6 +58,8 @@ export default async function ProductDetailPage({
     name:
       rawProduct.name ?? "",
 
+cover_image:
+rawProduct.cover_image ?? "",
 
     product_code:
       rawProduct.product_code ?? "",
