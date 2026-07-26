@@ -82,12 +82,7 @@ export default async function ProductDetailPage({
 
 
     // 如果数据库没有，补默认值
-    designer:
-      rawProduct.designer ?? "",
-
-
-    factory:
-      rawProduct.factory ?? "",
+    
 
   };
 
