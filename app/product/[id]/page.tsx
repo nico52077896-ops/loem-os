@@ -46,71 +46,123 @@ export default async function ProductDetailPage({
 
 
 
-  // 数据库字段 -> 前端 Product 类型转换
+  // 数据库字段转换为 Product 类型
   const product = {
 
-  ...rawProduct,
+
+    id: rawProduct.id,
 
 
-  // 字段转换
-  productCode:
-    rawProduct.product_code ?? "",
+    name: rawProduct.name ?? "",
 
 
-  launchSeason:
-    rawProduct.launch_season ?? "",
+    product_code:
+      rawProduct.product_code ?? "",
 
 
-  retailPrice:
-    rawProduct.retail_price ?? 0,
+    launch_season:
+      rawProduct.launch_season ?? "",
 
 
-  targetCost:
-    rawProduct.target_cost ?? 0,
+    season:
+      rawProduct.season ?? "",
 
 
-  currentCost:
-    rawProduct.current_cost ?? 0,
-
-
-  coverImage:
-    rawProduct.cover_image ?? "",
-
-
-  aiInsights:
-    rawProduct.ai_insights ?? "",
+    category:
+      rawProduct.category ?? "",
 
 
 
-  // Product 类型需要，但数据库暂无
-  designer:
-    "",
+    source:
+      rawProduct.source ?? "原创设计",
 
 
-  factory:
-    "",
+
+    stage:
+      rawProduct.stage ?? "Planning",
 
 
-  costs:
-    [],
+
+    progress:
+      rawProduct.progress ?? 0,
 
 
-  materials:
-    [],
+
+    owner:
+      rawProduct.owner ?? "",
 
 
-  samples:
-    [],
+
+    designer:
+      rawProduct.designer ?? "",
 
 
-  documents:
-    [],
+
+    factory:
+      rawProduct.factory ?? "",
 
 
-  timeline:
-    [],
 
-};
+    retailPrice:
+      rawProduct.retail_price ?? 0,
+
+
+    targetCost:
+      rawProduct.target_cost ?? 0,
+
+
+    currentCost:
+      rawProduct.current_cost ?? 0,
+
+
+
+    costs: {
+
+      material:
+        rawProduct.costs?.material ?? 0,
+
+      trims:
+        rawProduct.costs?.trims ?? 0,
+
+      manufacturing:
+        rawProduct.costs?.manufacturing ?? 0,
+
+      packaging:
+        rawProduct.costs?.packaging ?? 0,
+
+      shipping:
+        rawProduct.costs?.shipping ?? 0,
+
+    },
+
+
+
+    materials:
+      rawProduct.materials ?? [],
+
+
+
+    samples:
+      rawProduct.samples ?? [],
+
+
+
+    documents:
+      rawProduct.documents ?? [],
+
+
+
+    timeline:
+      rawProduct.timeline ?? [],
+
+
+
+    aiInsights:
+      rawProduct.ai_insights ?? [],
+
+
+  };
+
 
 
 
