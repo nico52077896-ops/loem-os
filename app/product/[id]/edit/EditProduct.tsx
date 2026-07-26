@@ -508,7 +508,7 @@ productId={id}
 image={image}
 
 
-onUpdate={(url)=>setImage(url)}
+onUpdate={(url)=>setImage(url || "")}
 
 
 />
