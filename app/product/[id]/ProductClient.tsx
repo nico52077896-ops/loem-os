@@ -225,9 +225,9 @@ export default function ProductClient({
 
         category={product.category}
 
-        retailPrice={product.retail_price}
+       retailPrice={product.retailPrice}
 
-        targetCost={product.target_cost}
+       targetCost={product.targetCost}
 
       />
 
